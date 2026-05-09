@@ -53,7 +53,7 @@ export async function POST(request) {
     // Use upsert to update if product exists, or create if it doesn't (based on name)
     const product = await Product.findOneAndUpdate(
       { name }, 
-      { description, price, category, image, aiTags, stock },
+      { description, price, offerPrice: body.offerPrice || price, category, image, aiTags, stock },
       { new: true, upsert: true }
     );
 

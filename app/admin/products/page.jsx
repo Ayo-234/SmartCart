@@ -11,18 +11,37 @@ const categories = ['Earphone', 'Headphone', 'Smartphone', 'Laptop', 'Camera', '
 const emptyForm = { name: '', description: '', price: '', category: '', image: '', stock: '', aiTags: '' };
 
 export default function AdminProductsPage() {
-  const { currency } = useAppContext();
-  const [products, setProducts] = useState(productsDummyData);
+  const { currency, isAdmin, router } = useAppContext();
+  const [products, setProducts] = useState([]);
   const [search, setSearch] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [editProduct, setEditProduct] = useState(null);
   const [form, setForm] = useState(emptyForm);
   const [submitting, setSubmitting] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const filtered = products.filter(p =>
-    p.name.toLowerCase().includes(search.toLowerCase()) ||
-    p.category.toLowerCase().includes(search.toLowerCase())
-  );
+  React.useEffect(() => {
+    if (!isAdmin) {
+      router.push('/');
+      return;
+    }
+    fetchProducts();
+  }, [isAdmin]);
+
+  const fetchProducts = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch('/api/products');
+      if (res.ok) {
+        const data = await res.json();
+        setProducts(data.products || []);
+      }
+    } catch {
+      toast.error('Failed to load products');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -41,10 +60,22 @@ export default function AdminProductsPage() {
     setShowForm(true);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     if (!confirm('Delete this product?')) return;
-    setProducts(prev => prev.filter(p => p._id !== id));
-    toast.success('Product deleted');
+    try {
+      const res = await fetch(`/api/products/${id}`, {
+        method: 'DELETE',
+        credentials: 'same-origin',
+      });
+      if (res.ok) {
+        toast.success('Product deleted');
+        fetchProducts();
+      } else {
+        throw new Error('Failed');
+      }
+    } catch {
+      toast.error('Failed to delete');
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -55,8 +86,7 @@ export default function AdminProductsPage() {
     }
     setSubmitting(true);
 
-    // Simulate API call — replace with real fetch when MongoDB is connected
-    setTimeout(() => {
+    try {
       const payload = {
         ...form,
         price: parseFloat(form.price),
@@ -66,17 +96,35 @@ export default function AdminProductsPage() {
         aiTags: form.aiTags.split(',').map(t => t.trim()).filter(Boolean),
       };
 
-      if (editProduct) {
-        setProducts(prev => prev.map(p => p._id === editProduct._id ? { ...p, ...payload } : p));
-        toast.success('Product updated!');
+      const url = editProduct ? `/api/products/${editProduct._id}` : '/api/products';
+      const method = editProduct ? 'PUT' : 'POST';
+
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify(payload),
+      });
+
+      if (res.ok) {
+        toast.success(editProduct ? 'Product updated!' : 'Product added!');
+        setShowForm(false);
+        fetchProducts();
       } else {
-        setProducts(prev => [{ ...payload, _id: Date.now().toString(), date: Date.now() }, ...prev]);
-        toast.success('Product added!');
+        const errorData = await res.json();
+        throw new Error(errorData.error || 'Failed to save');
       }
-      setShowForm(false);
+    } catch (err) {
+      toast.error(err.message);
+    } finally {
       setSubmitting(false);
-    }, 600);
+    }
   };
+
+  const filtered = products.filter(p =>
+    p.name.toLowerCase().includes(search.toLowerCase()) ||
+    p.category.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <div>
