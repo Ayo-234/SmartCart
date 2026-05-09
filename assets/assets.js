@@ -139,10 +139,8 @@ export const productsDummyData = [
     "price": 499.99,
     "offerPrice": 399.99,
     "image": [
-      "https://raw.githubusercontent.com/avinashdm/gs-images/main/quickcart/k4dafzhwhgcn5tnoylrw.webp",
-      "https://raw.githubusercontent.com/avinashdm/gs-images/main/quickcart/j212frakb8hdrhvhajhg.webp",
-      "https://raw.githubusercontent.com/avinashdm/gs-images/main/quickcart/imwuugqxsajuwqpkegb5.webp",
-      "https://raw.githubusercontent.com/avinashdm/gs-images/main/quickcart/k1oqaslw5tb3ebw01vvj.webp"
+      "https://images.unsplash.com/photo-1588423770574-01b921133b77?q=80&w=1000&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1603351154351-5e2d0600bb77?q=80&w=1000&auto=format&fit=crop"
     ],
     "category": "Earphone",
     "date": 1738667236865,
@@ -156,7 +154,7 @@ export const productsDummyData = [
     "price": 429.99,
     "offerPrice": 329.99,
     "image": [
-      "https://raw.githubusercontent.com/avinashdm/gs-images/main/quickcart/m16coelz8ivkk9f0nwrz.webp"
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1000&auto=format&fit=crop"
     ],
     "category": "Headphone",
     "date": 1738667310300,
@@ -170,7 +168,7 @@ export const productsDummyData = [
     "price": 899.99,
     "offerPrice": 799.99,
     "image": [
-      "https://raw.githubusercontent.com/avinashdm/gs-images/main/quickcart/xjd4eprpwqs7odbera1w.webp"
+      "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?q=80&w=1000&auto=format&fit=crop"
     ],
     "category": "Smartphone",
     "date": 1738667366224,
@@ -184,7 +182,7 @@ export const productsDummyData = [
     "price": 399.99,
     "offerPrice": 349.99,
     "image": [
-      "https://raw.githubusercontent.com/avinashdm/gs-images/main/quickcart/hdfi4u3fmprazpnrnaga.webp"
+      "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?q=80&w=1000&auto=format&fit=crop"
     ],
     "category": "Earphone",
     "date": 1738667417511,
@@ -198,7 +196,7 @@ export const productsDummyData = [
     "price": 599.99,
     "offerPrice": 499.99,
     "image": [
-      "https://raw.githubusercontent.com/avinashdm/gs-images/main/quickcart/dd3l13vfoartrgbvkkh5.webp"
+      "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?q=80&w=1000&auto=format&fit=crop"
     ],
     "category": "Accessories",
     "date": 1738667503075,
@@ -212,7 +210,7 @@ export const productsDummyData = [
     "price": 4199.99,
     "offerPrice": 3899.99,
     "image": [
-      "https://raw.githubusercontent.com/avinashdm/gs-images/main/quickcart/r5h370zuujvrw461c6wy.webp"
+      "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1000&auto=format&fit=crop"
     ],
     "category": "Camera",
     "date": 1738667788883,
@@ -226,7 +224,7 @@ export const productsDummyData = [
     "price": 2799.99,
     "offerPrice": 2499.99,
     "image": [
-      "https://raw.githubusercontent.com/avinashdm/gs-images/main/quickcart/rzri7kytphxalrm9rubd.webp"
+      "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1000&auto=format&fit=crop"
     ],
     "category": "Laptop",
     "date": 1738667977644,
@@ -240,7 +238,7 @@ export const productsDummyData = [
     "price": 349.99,
     "offerPrice": 299.99,
     "image": [
-      "https://raw.githubusercontent.com/avinashdm/gs-images/main/quickcart/e3zjaupyumdkladmytke.webp"
+      "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=1000&auto=format&fit=crop"
     ],
     "category": "Earphone",
     "date": 1738668086331,
@@ -254,7 +252,7 @@ export const productsDummyData = [
     "price": 1699.99,
     "offerPrice": 1499.99,
     "image": [
-      "https://raw.githubusercontent.com/avinashdm/gs-images/main/quickcart/qqdcly8a8vkyciy9g0bw.webp"
+      "https://images.unsplash.com/photo-1535016120720-40c646bebbfc?q=80&w=1000&auto=format&fit=crop"
     ],
     "category": "Accessories",
     "date": 1738668126660,
@@ -268,7 +266,7 @@ export const productsDummyData = [
     "price": 2199.99,
     "offerPrice": 1999.99,
     "image": [
-      "https://raw.githubusercontent.com/avinashdm/gs-images/main/quickcart/wig1urqgnkeyp4t2rtso.webp"
+      "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=1000&auto=format&fit=crop"
     ],
     "category": "Laptop",
     "date": 1738668619198,

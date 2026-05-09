@@ -49,7 +49,13 @@ export async function POST(request) {
     }
 
     await connectDB();
-    const product = await Product.create({ name, description, price, category, image, aiTags, stock });
+    
+    // Use upsert to update if product exists, or create if it doesn't (based on name)
+    const product = await Product.findOneAndUpdate(
+      { name }, 
+      { description, price, category, image, aiTags, stock },
+      { new: true, upsert: true }
+    );
 
     return NextResponse.json({ product }, { status: 201 });
   } catch (error) {

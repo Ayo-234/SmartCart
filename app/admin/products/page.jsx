@@ -82,8 +82,8 @@ export default function AdminProductsPage() {
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-800">Products</h1>
-          <p className="text-gray-500 text-sm mt-0.5">{products.length} total products</p>
+          <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">Products</h1>
+          <p className="text-gray-500 dark:text-gray-400 text-sm mt-0.5">{products.length} total products</p>
         </div>
         <button
           onClick={openAdd}
@@ -101,16 +101,16 @@ export default function AdminProductsPage() {
           placeholder="Search products..."
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-gray-50"
+          className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-gray-50 dark:bg-gray-800 dark:text-white"
         />
       </div>
 
       {/* Product Table */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+      <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-gray-50 text-gray-500 text-xs uppercase tracking-wide">
+              <tr className="bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wide">
                 <th className="p-4 text-left">Product</th>
                 <th className="p-4 text-left">Category</th>
                 <th className="p-4 text-left">Price</th>
@@ -118,7 +118,7 @@ export default function AdminProductsPage() {
                 <th className="p-4 text-left">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-50">
+            <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
               {filtered.length === 0 ? (
                 <tr>
                   <td colSpan={5} className="p-12 text-center text-gray-400">
@@ -127,10 +127,10 @@ export default function AdminProductsPage() {
                   </td>
                 </tr>
               ) : filtered.map(p => (
-                <tr key={p._id} className="hover:bg-gray-50/60 transition-colors">
+                <tr key={p._id} className="hover:bg-gray-50/60 dark:hover:bg-gray-800/60 transition-colors">
                   <td className="p-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-lg bg-gray-100 overflow-hidden flex-shrink-0">
+                      <div className="w-12 h-12 rounded-lg bg-gray-100 dark:bg-gray-800 overflow-hidden flex-shrink-0">
                         <Image
                           src={Array.isArray(p.image) ? p.image[0] : p.image}
                           alt={p.name}
@@ -141,22 +141,22 @@ export default function AdminProductsPage() {
                         />
                       </div>
                       <div>
-                        <p className="font-medium text-gray-800 truncate max-w-[180px]">{p.name}</p>
-                        <p className="text-xs text-gray-400 truncate max-w-[180px]">{p.description?.slice(0, 50)}...</p>
+                        <p className="font-medium text-gray-800 dark:text-gray-100 truncate max-w-[180px]">{p.name}</p>
+                        <p className="text-xs text-gray-400 dark:text-gray-500 truncate max-w-[180px]">{p.description?.slice(0, 50)}...</p>
                       </div>
                     </div>
                   </td>
                   <td className="p-4">
-                    <span className="bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full text-xs font-medium">{p.category}</span>
+                    <span className="bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 px-2.5 py-1 rounded-full text-xs font-medium">{p.category}</span>
                   </td>
-                  <td className="p-4 font-semibold text-gray-800">{currency}{p.offerPrice || p.price}</td>
-                  <td className="p-4 text-gray-600">{p.stock ?? 'N/A'}</td>
+                  <td className="p-4 font-semibold text-gray-800 dark:text-gray-100">{currency}{p.offerPrice || p.price}</td>
+                  <td className="p-4 text-gray-600 dark:text-gray-400">{p.stock ?? 'N/A'}</td>
                   <td className="p-4">
                     <div className="flex items-center gap-2">
-                      <button onClick={() => openEdit(p)} className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                      <button onClick={() => openEdit(p)} className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-lg transition-colors">
                         <Edit size={16} />
                       </button>
-                      <button onClick={() => handleDelete(p._id)} className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                      <button onClick={() => handleDelete(p._id)} className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg transition-colors">
                         <Trash2 size={16} />
                       </button>
                     </div>
@@ -170,56 +170,56 @@ export default function AdminProductsPage() {
 
       {/* Add/Edit Product Modal */}
       {showForm && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-gray-100 flex items-center justify-between">
-              <h2 className="text-lg font-bold text-gray-800">{editProduct ? 'Edit Product' : 'Add New Product'}</h2>
-              <button onClick={() => setShowForm(false)} className="text-gray-400 hover:text-gray-600 text-2xl leading-none">&times;</button>
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto border border-transparent dark:border-gray-800">
+            <div className="p-6 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between">
+              <h2 className="text-lg font-bold text-gray-800 dark:text-gray-100">{editProduct ? 'Edit Product' : 'Add New Product'}</h2>
+              <button onClick={() => setShowForm(false)} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 text-2xl leading-none">&times;</button>
             </div>
             <form onSubmit={handleSubmit} className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1">Product Name *</label>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Product Name *</label>
                 <input name="name" value={form.name} onChange={handleChange} required
-                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="e.g. Apple AirPods Pro" />
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white dark:bg-gray-800 dark:text-white" placeholder="e.g. Apple AirPods Pro" />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1">Description *</label>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Description *</label>
                 <textarea name="description" value={form.description} onChange={handleChange} rows={3}
-                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none" placeholder="Product description..." />
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white dark:bg-gray-800 dark:text-white resize-none" placeholder="Product description..." />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">Price (₦) *</label>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Price (₦) *</label>
                   <input name="price" type="number" value={form.price} onChange={handleChange} required min="0"
-                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="0.00" />
+                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white dark:bg-gray-800 dark:text-white" placeholder="0.00" />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">Stock</label>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Stock</label>
                   <input name="stock" type="number" value={form.stock} onChange={handleChange} min="0"
-                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="0" />
+                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white dark:bg-gray-800 dark:text-white" placeholder="0" />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1">Category *</label>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Category *</label>
                 <select name="category" value={form.category} onChange={handleChange} required
-                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white">
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white dark:bg-gray-800 dark:text-white">
                   <option value="">Select category</option>
                   {categories.map(c => <option key={c} value={c}>{c}</option>)}
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1">Image URL *</label>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Image URL *</label>
                 <input name="image" value={form.image} onChange={handleChange} required
-                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="https://..." />
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white dark:bg-gray-800 dark:text-white" placeholder="https://..." />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1">AI Tags <span className="text-gray-400 font-normal">(comma separated)</span></label>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">AI Tags <span className="text-gray-400 font-normal dark:text-gray-500">(comma separated)</span></label>
                 <input name="aiTags" value={form.aiTags} onChange={handleChange}
-                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="e.g. wireless, earbuds, premium" />
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white dark:bg-gray-800 dark:text-white" placeholder="e.g. wireless, earbuds, premium" />
               </div>
               <div className="flex gap-3 pt-2">
                 <button type="button" onClick={() => setShowForm(false)}
-                  className="flex-1 py-2.5 border border-gray-200 rounded-xl font-semibold text-gray-600 hover:bg-gray-50 transition-colors">
+                  className="flex-1 py-2.5 border border-gray-200 dark:border-gray-700 rounded-xl font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
                   Cancel
                 </button>
                 <button type="submit" disabled={submitting}

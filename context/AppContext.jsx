@@ -28,6 +28,35 @@ export const AppContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Dark mode persistence
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('qc_dark_mode');
+    if (savedTheme === 'true') {
+      setIsDarkMode(true);
+      document.documentElement.classList.add('dark');
+    } else if (savedTheme === 'false') {
+      setIsDarkMode(false);
+      document.documentElement.classList.remove('dark');
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setIsDarkMode(true);
+      document.documentElement.classList.add('dark');
+    }
+  }, []);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(prev => {
+      const newVal = !prev;
+      localStorage.setItem('qc_dark_mode', newVal);
+      if (newVal) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      return newVal;
+    });
+  };
 
   // Fetch current user on mount
   useEffect(() => {
@@ -246,6 +275,7 @@ export const AppContextProvider = (props) => {
     trackInteraction,
     trackSearch,
     loading,
+    isDarkMode, toggleDarkMode,
   };
 
   return (

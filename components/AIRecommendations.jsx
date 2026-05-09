@@ -38,14 +38,14 @@ const AIRecommendations = () => {
     return (
       <div className="flex flex-col items-center pt-14">
         <div className="w-full flex items-center justify-between mb-6">
-          <div className="h-7 bg-gray-200 rounded w-56 animate-pulse" />
+          <div className="h-7 bg-gray-200 dark:bg-gray-800 rounded w-56 animate-pulse" />
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 w-full">
           {Array.from({ length: 5 }).map((_, i) => (
             <div key={i} className="flex flex-col gap-2">
-              <div className="h-52 bg-gray-200 rounded-xl animate-pulse" />
-              <div className="h-4 bg-gray-200 rounded w-3/4 animate-pulse" />
-              <div className="h-4 bg-gray-200 rounded w-1/2 animate-pulse" />
+              <div className="h-52 bg-gray-200 dark:bg-gray-800 rounded-xl animate-pulse" />
+              <div className="h-4 bg-gray-200 dark:bg-gray-800 rounded w-3/4 animate-pulse" />
+              <div className="h-4 bg-gray-200 dark:bg-gray-800 rounded w-1/2 animate-pulse" />
             </div>
           ))}
         </div>
@@ -66,12 +66,12 @@ const AIRecommendations = () => {
           ) : (
             <TrendingUp className="text-orange-500" size={22} />
           )}
-          <p className="text-2xl font-semibold text-gray-800">
+          <p className="text-2xl font-semibold text-gray-800 dark:text-gray-100">
             {isAI ? 'Recommended for You' : 'Trending Right Now'}
           </p>
         </div>
         {isAI && (
-          <span className="inline-flex items-center gap-1.5 text-xs font-semibold bg-purple-100 text-purple-600 px-3 py-1 rounded-full">
+          <span className="inline-flex items-center gap-1.5 text-xs font-semibold bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 px-3 py-1 rounded-full">
             <Sparkles size={12} /> AI Personalized
           </span>
         )}

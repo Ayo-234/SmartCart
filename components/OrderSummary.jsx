@@ -86,45 +86,45 @@ const OrderSummary = () => {
   };
 
   return (
-    <div className="w-full md:w-96 bg-gray-500/5 p-5">
-      <h2 className="text-xl md:text-2xl font-medium text-gray-700">
+    <div className="w-full md:w-96 bg-gray-500/5 dark:bg-gray-900/40 p-6 rounded-2xl border border-transparent dark:border-gray-800 transition-colors">
+      <h2 className="text-xl md:text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
         Order Summary
       </h2>
-      <hr className="border-gray-500/30 my-5" />
+      <hr className="border-gray-500/30 dark:border-gray-800 my-5" />
 
       <div className="space-y-6">
         <div>
-          <label className="text-base font-medium uppercase text-gray-600 block mb-2">
+          <label className="text-sm font-bold uppercase text-gray-600 dark:text-gray-400 block mb-3">
             Shipping Address
           </label>
           <div className="space-y-3">
-            <input name="fullName" placeholder="Full Name" value={address.fullName} onChange={handleChange} className="w-full border p-2 text-sm outline-none focus:border-blue-500" />
-            <input name="phoneNumber" placeholder="Phone Number" value={address.phoneNumber} onChange={handleChange} className="w-full border p-2 text-sm outline-none focus:border-blue-500" />
-            <input name="area" placeholder="Street / Area" value={address.area} onChange={handleChange} className="w-full border p-2 text-sm outline-none focus:border-blue-500" />
-            <div className="grid grid-cols-2 gap-2">
-              <input name="city" placeholder="City" value={address.city} onChange={handleChange} className="w-full border p-2 text-sm outline-none focus:border-blue-500" />
-              <input name="state" placeholder="State" value={address.state} onChange={handleChange} className="w-full border p-2 text-sm outline-none focus:border-blue-500" />
+            <input name="fullName" placeholder="Full Name" value={address.fullName} onChange={handleChange} className="w-full border dark:border-gray-700 p-3 text-sm outline-none focus:border-blue-500 dark:focus:border-blue-400 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg transition-colors" />
+            <input name="phoneNumber" placeholder="Phone Number" value={address.phoneNumber} onChange={handleChange} className="w-full border dark:border-gray-700 p-3 text-sm outline-none focus:border-blue-500 dark:focus:border-blue-400 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg transition-colors" />
+            <input name="area" placeholder="Street / Area" value={address.area} onChange={handleChange} className="w-full border dark:border-gray-700 p-3 text-sm outline-none focus:border-blue-500 dark:focus:border-blue-400 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg transition-colors" />
+            <div className="grid grid-cols-2 gap-3">
+              <input name="city" placeholder="City" value={address.city} onChange={handleChange} className="w-full border dark:border-gray-700 p-3 text-sm outline-none focus:border-blue-500 dark:focus:border-blue-400 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg transition-colors" />
+              <input name="state" placeholder="State" value={address.state} onChange={handleChange} className="w-full border dark:border-gray-700 p-3 text-sm outline-none focus:border-blue-500 dark:focus:border-blue-400 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg transition-colors" />
             </div>
-            <input name="pincode" placeholder="Postal Code (Optional)" value={address.pincode} onChange={handleChange} className="w-full border p-2 text-sm outline-none focus:border-blue-500" />
+            <input name="pincode" placeholder="Postal Code (Optional)" value={address.pincode} onChange={handleChange} className="w-full border dark:border-gray-700 p-3 text-sm outline-none focus:border-blue-500 dark:focus:border-blue-400 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg transition-colors" />
           </div>
         </div>
 
-        <hr className="border-gray-500/30 my-5" />
+        <hr className="border-gray-500/30 dark:border-gray-800 my-5" />
 
         <div className="space-y-4">
           <div className="flex justify-between text-base font-medium">
-            <p className="uppercase text-gray-600">Items {getCartCount()}</p>
-            <p className="text-gray-800">{currency}{getCartAmount().toFixed(2)}</p>
+            <p className="uppercase text-gray-600 dark:text-gray-400">Items {getCartCount()}</p>
+            <p className="text-gray-800 dark:text-gray-200">{currency}{getCartAmount().toFixed(2)}</p>
           </div>
           <div className="flex justify-between">
-            <p className="text-gray-600">Shipping Fee</p>
-            <p className="font-medium text-gray-800">Free</p>
+            <p className="text-gray-600 dark:text-gray-400">Shipping Fee</p>
+            <p className="font-medium text-gray-800 dark:text-green-400">Free</p>
           </div>
           <div className="flex justify-between">
-            <p className="text-gray-600">Tax (2%)</p>
-            <p className="font-medium text-gray-800">{currency}{tax.toFixed(2)}</p>
+            <p className="text-gray-600 dark:text-gray-400">Tax (2%)</p>
+            <p className="font-medium text-gray-800 dark:text-gray-200">{currency}{tax.toFixed(2)}</p>
           </div>
-          <div className="flex justify-between text-lg md:text-xl font-medium border-t pt-3">
+          <div className="flex justify-between text-lg md:text-xl font-bold border-t dark:border-gray-800 pt-5 text-gray-900 dark:text-white">
             <p>Total</p>
             <p>{currency}{total.toFixed(2)}</p>
           </div>
@@ -134,14 +134,14 @@ const OrderSummary = () => {
       <button 
         onClick={handleCheckout} 
         disabled={loading || authLoading || getCartCount() === 0}
-        className="w-full bg-orange-600 text-white py-3 mt-5 hover:bg-orange-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full bg-orange-600 hover:bg-orange-700 dark:bg-orange-700 dark:hover:bg-orange-600 text-white font-bold py-4 mt-8 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-orange-600/20"
       >
         {loading ? 'Processing...' : authLoading ? 'Checking Auth...' : 'Proceed to Payment'}
       </button>
 
       {!userData && !authLoading && (
-        <p className="text-xs text-gray-500 mt-3 text-center">
-          You need to <button onClick={() => router.push('/login')} className="text-blue-600 underline">sign in</button> to checkout
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-4 text-center">
+          You need to <button onClick={() => router.push('/login')} className="text-blue-600 dark:text-blue-400 underline font-medium">sign in</button> to checkout
         </p>
       )}
     </div>

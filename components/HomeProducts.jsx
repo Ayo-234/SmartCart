@@ -17,8 +17,8 @@ const HomeProducts = () => {
   return (
     <div className="flex flex-col items-center pt-14">
       <div className="w-full flex items-center justify-between mb-2">
-        <p className="text-2xl font-medium text-left">Popular Products</p>
-        <button onClick={() => router.push('/all-products')} className="text-sm text-blue-600 hover:underline">
+        <p className="text-2xl font-semibold text-left text-gray-900 dark:text-gray-100">Popular Products</p>
+        <button onClick={() => router.push('/all-products')} className="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline">
           View All
         </button>
       </div>

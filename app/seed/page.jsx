@@ -58,9 +58,9 @@ export default function SeedData() {
           disabled={status === 'seeding' || status === 'success'}
           className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition"
         >
-          {status === 'seeding' ? `Seeding ${count}/${productsDummyData.length}...` : 
-           status === 'success' ? `${count} Products Seeded!` : 
-           'Seed Products'}
+          {status === 'seeding' ? `Processing ${count}/${productsDummyData.length}...` : 
+           status === 'success' ? `${count} Products Processed!` : 
+           'Seed / Update Products'}
         </button>
         
         {status === 'success' && (

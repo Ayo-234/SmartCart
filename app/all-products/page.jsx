@@ -29,8 +29,8 @@ const AllProducts = () => {
       <Navbar />
       <div className="px-6 md:px-16 lg:px-32 pt-8 mb-20">
         <div className="flex flex-col items-center mb-12">
-          <p className="text-3xl font-medium">All <span className="text-orange-600">Products</span></p>
-          <div className="w-24 h-0.5 bg-orange-600 mt-2"></div>
+          <p className="text-3xl font-medium text-gray-900 dark:text-gray-100">All <span className="text-orange-600">Products</span></p>
+          <div className="w-24 h-0.5 bg-orange-600 dark:bg-orange-500 mt-2"></div>
         </div>
 
         {/* Category Filter */}
@@ -41,8 +41,8 @@ const AllProducts = () => {
               onClick={() => setCategory(cat === "All" ? "" : cat)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition ${
                 (category === cat || (cat === "All" && !category))
-                  ? "bg-orange-600 text-white"
-                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                  ? "bg-orange-600 text-white shadow-md"
+                  : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700"
               }`}
             >
               {cat}
@@ -52,11 +52,11 @@ const AllProducts = () => {
 
         {filteredProducts.length === 0 ? (
           <div className="flex flex-col items-center py-20">
-            <Image src={assets.product_list_icon} alt="No products" className="w-20 h-20 opacity-30 mb-4" />
-            <p className="text-xl text-gray-400">No products found</p>
+            <Image src={assets.product_list_icon} alt="No products" className="w-20 h-20 opacity-30 mb-4 dark:invert" />
+            <p className="text-xl text-gray-400 dark:text-gray-500">No products found</p>
             <button 
               onClick={() => { setCategory(""); router.push('/all-products'); }} 
-              className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              className="mt-4 px-6 py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 text-white rounded-lg transition-colors"
             >
               Clear Filters
             </button>
