@@ -6,7 +6,7 @@ import { Plus, Search, Edit, Trash2, Package } from 'lucide-react';
 import Image from 'next/image';
 import toast from 'react-hot-toast';
 
-const categories = ['Earphone', 'Headphone', 'Smartphone', 'Laptop', 'Camera', 'Accessories', 'Watch'];
+const categories = ['Earphone', 'Headphone', 'Smartphone', 'Laptop', 'Camera', 'Accessories', 'Watch', 'Fashion', 'Home Decor', 'Kitchen', 'Beauty', 'Fitness', 'Furniture'];
 
 const emptyForm = { name: '', description: '', price: '', category: '', image: '', stock: '', aiTags: '' };
 

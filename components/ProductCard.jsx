@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useAppContext } from '@/context/AppContext';
 
 const ProductCard = ({ product }) => {
-    const { currency, router } = useAppContext();
+    const { currency, router, formatPrice } = useAppContext();
     const price = product.offerPrice || product.price;
     const originalPrice = product.offerPrice ? product.price : null;
 
@@ -52,9 +52,9 @@ const ProductCard = ({ product }) => {
 
             <div className="flex items-end justify-between w-full mt-1 gap-2">
                 <div className="flex items-center gap-1.5">
-                    <p className="text-base font-medium text-gray-900 dark:text-gray-100">{currency}{price}</p>
+                    <p className="text-base font-medium text-gray-900 dark:text-gray-100">{currency}{formatPrice(price)}</p>
                     {originalPrice && (
-                        <p className="text-xs text-gray-400 dark:text-gray-500 line-through">{currency}{originalPrice}</p>
+                        <p className="text-xs text-gray-400 dark:text-gray-500 line-through">{currency}{formatPrice(originalPrice)}</p>
                     )}
                 </div>
                 <button 

@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar";
 import { useAppContext } from "@/context/AppContext";
 
 const Cart = () => {
-  const { products, router, cartItems, addToCart, updateCartQuantity, getCartCount } = useAppContext();
+  const { products, router, cartItems, addToCart, updateCartQuantity, getCartCount, formatPrice } = useAppContext();
 
   return (
     <>
@@ -88,7 +88,7 @@ const Cart = () => {
                           </div>
                         </td>
                         <td className="py-6 md:px-4 px-1 text-gray-700 dark:text-gray-300 font-medium">
-                          {process.env.NEXT_PUBLIC_CURRENCY || '₦'}{price}
+                          {process.env.NEXT_PUBLIC_CURRENCY || '₦'}{formatPrice(price)}
                         </td>
                         <td className="py-6 md:px-4 px-1">
                           <div className="flex items-center md:gap-3 gap-2 bg-gray-50 dark:bg-gray-800 w-fit px-2 py-1 rounded-lg border border-gray-200 dark:border-gray-700">
@@ -108,7 +108,7 @@ const Cart = () => {
                           </div>
                         </td>
                         <td className="py-6 md:px-4 px-1 text-gray-900 dark:text-gray-100 font-bold">
-                          {process.env.NEXT_PUBLIC_CURRENCY || '₦'}{(price * cartItems[itemId]).toFixed(2)}
+                          {process.env.NEXT_PUBLIC_CURRENCY || '₦'}{formatPrice(price * cartItems[itemId])}
                         </td>
                       </tr>
                     );

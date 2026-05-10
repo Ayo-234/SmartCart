@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 
 const OrderSummary = () => {
-  const { currency, router, getCartCount, getCartAmount, userData, cartItems, products, clearCart, loading: authLoading } = useAppContext();
+  const { currency, router, getCartCount, getCartAmount, userData, cartItems, products, clearCart, loading: authLoading, formatPrice } = useAppContext();
   const [address, setAddress] = useState({
     fullName: '',
     phoneNumber: '',
@@ -114,7 +114,7 @@ const OrderSummary = () => {
         <div className="space-y-4">
           <div className="flex justify-between text-base font-medium">
             <p className="uppercase text-gray-600 dark:text-gray-400">Items {getCartCount()}</p>
-            <p className="text-gray-800 dark:text-gray-200">{currency}{getCartAmount().toFixed(2)}</p>
+            <p className="text-gray-800 dark:text-gray-200">{currency}{formatPrice(getCartAmount())}</p>
           </div>
           <div className="flex justify-between">
             <p className="text-gray-600 dark:text-gray-400">Shipping Fee</p>
@@ -122,11 +122,11 @@ const OrderSummary = () => {
           </div>
           <div className="flex justify-between">
             <p className="text-gray-600 dark:text-gray-400">Tax (2%)</p>
-            <p className="font-medium text-gray-800 dark:text-gray-200">{currency}{tax.toFixed(2)}</p>
+            <p className="font-medium text-gray-800 dark:text-gray-200">{currency}{formatPrice(tax)}</p>
           </div>
           <div className="flex justify-between text-lg md:text-xl font-bold border-t dark:border-gray-800 pt-5 text-gray-900 dark:text-white">
             <p>Total</p>
-            <p>{currency}{total.toFixed(2)}</p>
+            <p>{currency}{formatPrice(total)}</p>
           </div>
         </div>
       </div>

@@ -262,6 +262,12 @@ export const AppContextProvider = (props) => {
     }
   };
 
+  const formatPrice = (price) => {
+    return Number(price).toLocaleString('en-GB', {
+      maximumFractionDigits: 0
+    });
+  };
+
   const value = {
     currency, router,
     isAdmin, setIsAdmin,
@@ -276,6 +282,7 @@ export const AppContextProvider = (props) => {
     trackSearch,
     loading,
     isDarkMode, toggleDarkMode,
+    formatPrice,
   };
 
   return (

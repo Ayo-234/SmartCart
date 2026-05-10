@@ -13,7 +13,7 @@ import toast from "react-hot-toast";
 
 const Product = () => {
     const { id } = useParams();
-    const { products, router, addToCart, trackInteraction } = useAppContext();
+    const { products, router, addToCart, trackInteraction, formatPrice } = useAppContext();
 
     const [mainImage, setMainImage] = useState(null);
     const [productData, setProductData] = useState(null);
@@ -121,10 +121,10 @@ const Product = () => {
                         {productData.description}
                     </p>
                     <p className="text-4xl font-bold mt-8 text-gray-900 dark:text-gray-100 flex items-baseline gap-3">
-                        {process.env.NEXT_PUBLIC_CURRENCY || '₦'}{productData.offerPrice || productData.price}
+                        {process.env.NEXT_PUBLIC_CURRENCY || '₦'}{formatPrice(productData.offerPrice || productData.price)}
                         {productData.offerPrice ? (
                             <span className="text-lg font-normal text-gray-400 line-through">
-                                {process.env.NEXT_PUBLIC_CURRENCY || '₦'}{productData.price}
+                                {process.env.NEXT_PUBLIC_CURRENCY || '₦'}{formatPrice(productData.price)}
                             </span>
                         ) : null}
                     </p>
