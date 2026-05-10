@@ -125,3 +125,11 @@ export async function POST(request) {
     return NextResponse.json({ error: 'Failed to track interaction' }, { status: 500 });
   }
 }
+    }
+
+    return NextResponse.json({ success: true, interactionId: interaction._id });
+  } catch (error) {
+    console.error('Track interaction error:', error);
+    return NextResponse.json({ error: 'Failed to track interaction' }, { status: 500 });
+  }
+}
