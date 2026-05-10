@@ -55,21 +55,29 @@ export async function GET(request) {
     }));
 
     // 3. Get AI-generated recommendation keywords from Gemini
-    const keywords = await getRecommendationKeywords(historyForAI);
+    let keywords = await getRecommendationKeywords(historyForAI);
+    let type = 'ai-personalized';
 
     // Fallback: use categories from history if AI returns empty (includes 429 case)
     if (keywords.length === 0) {
-      const categories = [...new Set(historyForAI.map(i => i.category))];
-      const products = await Product.find({ category: { $in: categories } }).limit(8);
-      return NextResponse.json({ type: 'category-based', products });
+      keywords = [...new Set(historyForAI.map(i => i.category))].filter(Boolean);
+      type = 'category-based';
     }
 
-    // 4. Cache the new recommendations
+    // Cold start fallback if keywords still empty
+    if (keywords.length === 0) {
+      const trending = await Product.find({})
+        .sort({ 'stats.views': -1, 'stats.sales': -1 })
+        .limit(8);
+      return NextResponse.json({ type: 'trending', products: trending });
+    }
+
+    // 4. Cache the new recommendations (even if they are fallback category-based)
     await Recommendation.create({
       userId: userId || null,
       sessionId,
       keywords,
-      expiresAt: new Date(Date.now() + 60 * 60 * 1000), // 1 hour
+      expiresAt: new Date(Date.now() + 30 * 60 * 1000), // Reduce to 30 mins for more dynamic updates, but still prevents refresh hammering
     });
 
     // Use keywords to query MongoDB with text-like search
@@ -85,7 +93,7 @@ export async function GET(request) {
     const recommended = await Product.find({ $or: orConditions.flatMap(c => c.$or) })
       .limit(8);
 
-    return NextResponse.json({ type: 'ai-personalized', products: recommended, keywords });
+    return NextResponse.json({ type, products: recommended, keywords });
   } catch (error) {
     console.error('Recommendations error:', error);
     return NextResponse.json({ error: 'Failed to fetch recommendations' }, { status: 500 });
@@ -117,14 +125,6 @@ export async function POST(request) {
       await Product.findByIdAndUpdate(productId, { $inc: { 'stats.views': 1 } });
     } else if (actionType === 'purchase') {
       await Product.findByIdAndUpdate(productId, { $inc: { 'stats.sales': 1 } });
-    }
-
-    return NextResponse.json({ success: true, interactionId: interaction._id });
-  } catch (error) {
-    console.error('Track interaction error:', error);
-    return NextResponse.json({ error: 'Failed to track interaction' }, { status: 500 });
-  }
-}
     }
 
     return NextResponse.json({ success: true, interactionId: interaction._id });
