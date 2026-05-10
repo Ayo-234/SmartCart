@@ -12,7 +12,7 @@ const AllProducts = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [category, setCategory] = useState("");
   
-  const categories = ["All", "Laptop", "Earphone", "Headphone", "Smartphone", "Camera", "Accessories", "Smartwatch"];
+  const categories = ["All", "Fashion", "Home Decor", "Kitchen", "Beauty", "Fitness", "Furniture", "Laptop", "Smartphone", "Earphone", "Headphone", "Camera", "Accessories", "Watch"];
 
   useEffect(() => {
     if (products.length > 0) {
@@ -29,20 +29,20 @@ const AllProducts = () => {
       <Navbar />
       <div className="px-6 md:px-16 lg:px-32 pt-8 mb-20">
         <div className="flex flex-col items-center mb-12">
-          <p className="text-3xl font-medium text-gray-900 dark:text-gray-100">All <span className="text-orange-600">Products</span></p>
+          <p className="text-3xl font-bold text-gray-900 dark:text-gray-100">All <span className="text-orange-600">Products</span></p>
           <div className="w-24 h-0.5 bg-orange-600 dark:bg-orange-500 mt-2"></div>
         </div>
 
-        {/* Category Filter */}
-        <div className="flex flex-wrap gap-3 mb-8 justify-center">
+        {/* Category Filter - Scrollable */}
+        <div className="flex overflow-x-auto gap-3 mb-10 pb-4 no-scrollbar snap-x snap-mandatory">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setCategory(cat === "All" ? "" : cat)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition ${
+              className={`px-5 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap transition snap-start shadow-sm border ${
                 (category === cat || (cat === "All" && !category))
-                  ? "bg-orange-600 text-white shadow-md"
-                  : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700"
+                  ? "bg-gray-900 dark:bg-white text-white dark:text-gray-900 border-transparent"
+                  : "bg-white dark:bg-gray-900 text-gray-500 dark:text-gray-400 border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800"
               }`}
             >
               {cat}

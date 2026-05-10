@@ -22,9 +22,11 @@ const HomeProducts = () => {
           View All
         </button>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 items-center gap-6 mt-6 pb-14 w-full">
-        {trending.map((product, index) => (
-          <ProductCard key={index} product={product} />
+      <div className="w-full flex overflow-x-auto gap-6 mt-6 pb-6 snap-x snap-mandatory transition-all scroll-smooth scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700">
+        {trending.slice(0, 20).map((product, index) => (
+          <div key={index} className="flex-shrink-0 snap-start w-[180px] md:w-[220px]">
+            <ProductCard product={product} />
+          </div>
         ))}
       </div>
     </div>

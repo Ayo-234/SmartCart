@@ -77,9 +77,11 @@ const AIRecommendations = () => {
         )}
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 w-full">
+      <div className="w-full flex overflow-x-auto gap-6 pb-6 snap-x snap-mandatory transition-all scroll-smooth scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700">
         {recommendations.map((product) => (
-          <ProductCard key={product._id} product={product} />
+          <div key={product._id} className="flex-shrink-0 snap-start w-[180px] md:w-[220px]">
+            <ProductCard product={product} />
+          </div>
         ))}
       </div>
     </div>
