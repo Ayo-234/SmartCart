@@ -78,9 +78,11 @@ const AIRecommendations = () => {
       </div>
 
       <div className="w-full flex overflow-x-auto gap-6 pb-6 snap-x snap-mandatory transition-all scroll-smooth scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700">
-        {recommendations.map((product) => (
-          <div key={product._id} className="flex-shrink-0 snap-start w-[180px] md:w-[220px]">
-            <ProductCard product={product} />
+        {Array.from({ length: Math.ceil(recommendations.length / 2) }).map((_, colIndex) => (
+          <div key={colIndex} className="flex flex-col gap-6 flex-shrink-0 snap-start w-[180px] md:w-[220px]">
+            {recommendations.slice(colIndex * 2, colIndex * 2 + 2).map((product) => (
+              <ProductCard key={product._id} product={product} />
+            ))}
           </div>
         ))}
       </div>
