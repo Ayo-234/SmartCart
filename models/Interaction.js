@@ -14,12 +14,16 @@ const InteractionSchema = new mongoose.Schema(
     productId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Product',
-      required: true,
+      required: false, // Optional for search actions
     },
     actionType: {
       type: String,
       enum: ['view', 'click', 'search', 'purchase', 'add_to_cart'],
       required: true,
+    },
+    searchQuery: {
+      type: String,
+      required: false,
     },
     metadata: {
       type: mongoose.Schema.Types.Mixed,

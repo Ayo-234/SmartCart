@@ -248,13 +248,15 @@ export const AppContextProvider = (props) => {
 
   const trackSearch = async (query) => {
     try {
-      await fetch('/api/interactions', {
+      await fetch('/api/recommendations', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           sessionId: getSessionId(),
           actionType: 'search',
           searchQuery: query,
+          productId: null,
+          userId: userData?._id || null
         }),
       });
     } catch {

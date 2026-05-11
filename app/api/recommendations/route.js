@@ -32,12 +32,12 @@ export async function GET(request) {
       return NextResponse.json({ type: 'ai-personalized', products: recommended, keywords, cached: true });
     }
 
-    // 2. Build query to find recent user interactions
+    // 2. Build query to find recent user interactions (views, purchases, and SEARCHES)
     const query = userId ? { userId } : { sessionId };
     const interactions = await Interaction.find(query)
       .populate('productId', 'name category aiTags')
       .sort({ createdAt: -1 })
-      .limit(20);
+      .limit(30);
 
     // Cold start: no history → return trending/popular products
     if (interactions.length === 0) {
@@ -48,20 +48,41 @@ export async function GET(request) {
     }
 
     // Build interaction history for AI prompt
-    const historyForAI = interactions.map(i => ({
-      actionType: i.actionType,
-      productName: i.productId?.name || 'Unknown',
-      category: i.productId?.category || 'Unknown',
-    }));
+    const historyForAI = interactions.map(i => {
+      if (i.actionType === 'search') {
+        return { type: 'search', query: i.searchQuery };
+      }
+      return {
+        actionType: i.actionType,
+        productName: i.productId?.name || 'Unknown',
+        category: i.productId?.category || 'Unknown',
+        tags: i.productId?.aiTags || []
+      };
+    });
 
-    // 3. Get AI-generated recommendation keywords from Gemini
+    // 3. Get AI-generated recommendation keywords
     let keywords = await getRecommendationKeywords(historyForAI);
     let type = 'ai-personalized';
 
-    // Fallback: use categories from history if AI returns empty (includes 429 case)
+    // FALLBACK: Content-Based Filtering via Tags
     if (keywords.length === 0) {
-      keywords = [...new Set(historyForAI.map(i => i.category))].filter(Boolean);
-      type = 'category-based';
+      // Find the most common tags in user's history
+      const allTags = interactions
+        .flatMap(i => i.productId?.aiTags || [])
+        .filter(Boolean);
+      
+      const tagCounts = allTags.reduce((acc, tag) => {
+        acc[tag] = (acc[tag] || 0) + 1;
+        return acc;
+      }, {});
+
+      // Get top 3 most frequent tags
+      keywords = Object.entries(tagCounts)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 3)
+        .map(entry => entry[0]);
+      
+      type = 'tag-based';
     }
 
     // Cold start fallback if keywords still empty
@@ -72,21 +93,19 @@ export async function GET(request) {
       return NextResponse.json({ type: 'trending', products: trending });
     }
 
-    // 4. Cache the new recommendations (even if they are fallback category-based)
+    // 4. Cache and Query
     await Recommendation.create({
       userId: userId || null,
       sessionId,
       keywords,
-      expiresAt: new Date(Date.now() + 30 * 60 * 1000), // Reduce to 30 mins for more dynamic updates, but still prevents refresh hammering
+      expiresAt: new Date(Date.now() + 30 * 60 * 1000),
     });
 
-    // Use keywords to query MongoDB with text-like search
     const orConditions = keywords.map(kw => ({
       $or: [
         { name: { $regex: kw, $options: 'i' } },
         { category: { $regex: kw, $options: 'i' } },
-        { description: { $regex: kw, $options: 'i' } },
-        { aiTags: { $in: [new RegExp(kw, 'i')] } },
+        { aiTags: { $in: [new RegExp(`^${kw}$`, 'i'), new RegExp(kw, 'i')] } },
       ],
     }));
 
@@ -104,9 +123,9 @@ export async function GET(request) {
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { sessionId, userId, productId, actionType, metadata } = body;
+    const { sessionId, userId, productId, actionType, searchQuery, metadata } = body;
 
-    if (!sessionId || !productId || !actionType) {
+    if (!sessionId || (!productId && actionType !== 'search') || !actionType) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
@@ -115,8 +134,9 @@ export async function POST(request) {
     const interaction = await Interaction.create({
       sessionId,
       userId: userId || null,
-      productId,
+      productId: productId || null,
       actionType,
+      searchQuery,
       metadata,
     });
 
