@@ -2530,6 +2530,150 @@ export const productsDummyData = [
     ],
     "category": "Laptop",
     "date": 1777713846112
+  },
+  {
+    "_id": "prod_201",
+    "name": "Urban Techwear Cargo Pants",
+    "description": "Durable and stylish techwear cargo pants with multiple utility pockets. Perfect for urban exploration and modern fashion enthusiasts.",
+    "price": 45000,
+    "offerPrice": 38500,
+    "image": [
+      "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=1000&auto=format&fit=crop"
+    ],
+    "category": "Fashion",
+    "date": Date.now()
+  },
+  {
+    "_id": "prod_202",
+    "name": "Boho-Chic Maxi Skirt",
+    "description": "Flowy and comfortable maxi skirt with a vibrant bohemian print. Ideal for summer outings and casual beach days.",
+    "price": 28000,
+    "offerPrice": 22000,
+    "image": [
+      "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?q=80&w=1000&auto=format&fit=crop"
+    ],
+    "category": "Fashion",
+    "date": Date.now()
+  },
+  {
+    "_id": "prod_203",
+    "name": "Classic Navy Blazer",
+    "description": "A well-structured navy blazer that adds a touch of sophistication to any outfit. Made from premium wool-blend fabric.",
+    "price": 85000,
+    "offerPrice": 72000,
+    "image": [
+      "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=1000&auto=format&fit=crop"
+    ],
+    "category": "Fashion",
+    "date": Date.now()
+  },
+  {
+    "_id": "prod_204",
+    "name": "Athletic Compression Tee",
+    "description": "High-performance compression shirt designed to support muscles and wick away moisture during intense workouts.",
+    "price": 15000,
+    "offerPrice": 12500,
+    "image": [
+      "https://images.unsplash.com/photo-1581655353564-df123a1eb820?q=80&w=1000&auto=format&fit=crop"
+    ],
+    "category": "Fashion",
+    "date": Date.now()
+  },
+  {
+    "_id": "prod_205",
+    "name": "Cozy Sherpa Fleece Jacket",
+    "description": "Ultra-soft and warm sherpa fleece jacket, perfect for chilly autumn evenings and winter layering.",
+    "price": 55000,
+    "offerPrice": 48000,
+    "image": [
+      "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=1000&auto=format&fit=crop"
+    ],
+    "category": "Fashion",
+    "date": Date.now()
+  },
+  {
+    "_id": "prod_206",
+    "name": "Minimalist White Sneakers",
+    "description": "Clean, versatile white sneakers that pair perfectly with jeans, chinos, or even suits. Made from high-quality faux leather.",
+    "price": 32000,
+    "offerPrice": 27500,
+    "image": [
+      "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=1000&auto=format&fit=crop"
+    ],
+    "category": "Fashion",
+    "date": Date.now()
+  },
+  {
+    "_id": "prod_207",
+    "name": "Vintage-Wash Denim Overalls",
+    "description": "Classic denim overalls with a vintage wash. A playful and stylish addition to your weekend wardrobe.",
+    "price": 42000,
+    "offerPrice": 35000,
+    "image": [
+      "https://images.unsplash.com/photo-1584905066893-7d5c142ba4e1?q=80&w=1000&auto=format&fit=crop"
+    ],
+    "category": "Fashion",
+    "date": Date.now()
+  },
+  {
+    "_id": "prod_208",
+    "name": "Luxury Silk Pajama Set",
+    "description": "Experience ultimate comfort and luxury with this 100% pure silk pajama set. Elegant design with a smooth, cooling feel.",
+    "price": 95000,
+    "offerPrice": 88000,
+    "image": [
+      "https://images.unsplash.com/photo-1616422285623-13ff0167c95c?q=80&w=1000&auto=format&fit=crop"
+    ],
+    "category": "Fashion",
+    "date": Date.now()
+  },
+  {
+    "_id": "prod_209",
+    "name": "Waterproof Hiking Parka",
+    "description": "Highly durable and waterproof parka designed for hiking and outdoor adventures. Lightweight yet extremely protective.",
+    "price": 120000,
+    "offerPrice": 105000,
+    "image": [
+      "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=1000&auto=format&fit=crop"
+    ],
+    "category": "Fashion",
+    "date": Date.now()
+  },
+  {
+    "_id": "prod_210",
+    "name": "Sustainable Organic Cotton Tee",
+    "description": "Premium quality t-shirt made from 100% organic cotton. Soft, breathable, and environmentally friendly.",
+    "price": 12000,
+    "offerPrice": 10000,
+    "image": [
+      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1000&auto=format&fit=crop"
+    ],
+    "category": "Fashion",
+    "date": Date.now()
+  },
+  {
+    "_id": "prod_211",
+    "name": "Aura Oversized Essential Hoodie",
+    "description": "Premium oversized hoodie made from heavy-weight cotton fleece. Features a relaxed fit, drop shoulders, and a cozy double-layered hood.",
+    "price": 35000,
+    "offerPrice": 29500,
+    "image": [
+      "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=1000&auto=format&fit=crop"
+    ],
+    "category": "Fashion",
+    "date": Date.now()
+  },
+  {
+    "_id": "prod_212",
+    "name": "Titan G15 Gaming Laptop Ultra",
+    "description": "High-performance gaming laptop with NVIDIA RTX 4080, Intel i9 processor, and a stunning 165Hz QHD display. Built for elite gamers.",
+    "price": 1850000,
+    "offerPrice": 1750000,
+    "image": [
+      "https://images.unsplash.com/photo-1603302576837-37561b2e2302?q=80&w=1000&auto=format&fit=crop"
+    ],
+    "category": "Laptop",
+    "date": Date.now()
   }
 ]
 

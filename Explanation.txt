@@ -1,0 +1,49 @@
+Welcome to the Next.js Masterclass! Since you're just starting with Next.js, let’s use QuickCart as our textbook.
+
+In Next.js, we don't just "build a website"; we build a Full-Stack Application where the frontend and backend live together in one place.
+
+Phase 1: The "Skeleton" (Folders and Routing)
+In Next.js, the folder structure is the navigation. Look at the app/ folder:
+
+app/page.jsx: This is your Homepage (/).
+app/cart/page.jsx: This automatically becomes the /cart URL.
+app/layout.js: This is the "Wrapper." Anything you put here (like a Navbar or Footer) stays on the screen even when the user moves between pages.
+Lesson 1: To create a new page in Next.js, you just create a folder with a page.jsx inside it.
+
+Phase 2: Client vs. Server (The Most Important Concept)
+Next.js 15 uses Server Components by default. This means the code runs on the server (the "kitchen") and sends finished HTML to the browser.
+
+Server Component: Good for fetching products from the database. It's fast and secure.
+Client Component: Needed when you have interaction (clicks, typing, state).
+Example: Look at the top of context/AppContext.jsx. It says 'use client'. This tells Next.js, "Hey, this file needs to handle clicks and browser memory (state)!"
+Lesson 2: Use 'use client' ONLY when you need React hooks like useState or useEffect.
+
+Phase 3: The "Brain" (Context API)
+In a big app, you don't want to pass the "Cart Count" from page to page manually. We use Context.
+
+Open context/AppContext.jsx.
+We use useState to hold the cartItems.
+We wrap the whole app in <AppContext.Provider>.
+Now, any component (the Navbar, the Product Card, the Cart Page) can just say useAppContext() to see what's in the cart.
+Lesson 3: Context is like a "Global Radio Station." You broadcast data, and any component can tune in.
+
+Phase 4: The "Hidden Backend" (API Routes)
+In traditional coding, you'd have a separate Node.js server. In Next.js, the backend is inside the app/api/ folder.
+
+app/api/products/route.js: This is an "Endpoint."
+When the frontend says fetch('/api/products'), Next.js runs the code in this file, connects to MongoDB, and sends back the list of products.
+Lesson 4: The app/api folder is where your "Private Logic" (database passwords, AI keys) stays safe from the user.
+
+Phase 5: Talking to AI (The "Feature" Logic)
+This is where you become a pro. Look at lib/ai.js.
+
+The Prompt: We write a string (the "Prompt") asking Gemini to do something.
+The Fetch: We send that prompt to Google's servers.
+The Logic: We take the AI's answer and use it to filter our products.
+Lesson 5: Coding is just "Input -> Logic -> Output." AI is just a very smart "Logic" step in the middle.
+
+Your First Assignment (To test your knowledge):
+Try to find the file that controls the Product Detail Page.
+
+Hint: It’s in the app/ folder. It uses a special folder name with brackets like [id]. This is called a Dynamic Route, allowing one file to handle thousands of different products!
+Do you want to try making a small change to a component to see how "Hot Reloading" works? We could change a button color or the "Empty Cart" message!

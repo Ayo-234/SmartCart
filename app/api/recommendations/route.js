@@ -66,6 +66,7 @@ export async function GET(request) {
 
     // FALLBACK: Content-Based Filtering via Tags
     if (keywords.length === 0) {
+      console.log('AI Recommendation failed or returned empty. Falling back to tag-based filtering.');
       // Find the most common tags in user's history
       const allTags = interactions
         .flatMap(i => i.productId?.aiTags || [])
@@ -105,7 +106,8 @@ export async function GET(request) {
       $or: [
         { name: { $regex: kw, $options: 'i' } },
         { category: { $regex: kw, $options: 'i' } },
-        { aiTags: { $in: [new RegExp(`^${kw}$`, 'i'), new RegExp(kw, 'i')] } },
+        { description: { $regex: kw, $options: 'i' } },
+        { aiTags: { $in: [new RegExp(kw, 'i')] } },
       ],
     }));
 
@@ -113,6 +115,7 @@ export async function GET(request) {
       .limit(8);
 
     return NextResponse.json({ type, products: recommended, keywords });
+
   } catch (error) {
     console.error('Recommendations error:', error);
     return NextResponse.json({ error: 'Failed to fetch recommendations' }, { status: 500 });

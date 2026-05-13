@@ -20,6 +20,7 @@ export async function GET(request) {
     const category = searchParams.get('category') || '';
     const page = parseInt(searchParams.get('page') || '1');
     const limit = parseInt(searchParams.get('limit') || '100');
+    const sort = searchParams.get('sort') || 'newest';
     const skip = (page - 1) * limit;
 
     await connectDB();
@@ -36,8 +37,19 @@ export async function GET(request) {
       query.category = category;
     }
 
+    let sortQuery = { createdAt: -1 };
+    if (sort === 'popular') {
+      sortQuery = { 'stats.sales': -1, 'stats.views': -1, rating: -1 };
+    } else if (sort === 'oldest') {
+      sortQuery = { createdAt: 1 };
+    } else if (sort === 'price-low') {
+      sortQuery = { price: 1 };
+    } else if (sort === 'price-high') {
+      sortQuery = { price: -1 };
+    }
+
     const [products, total] = await Promise.all([
-      Product.find(query).skip(skip).limit(limit).sort({ createdAt: -1 }),
+      Product.find(query).skip(skip).limit(limit).sort(sortQuery),
       Product.countDocuments(query),
     ]);
 
@@ -81,7 +93,7 @@ export async function POST(request) {
     const product = await Product.findOneAndUpdate(
       { name }, 
       { description, price, offerPrice: body.offerPrice || price, category, image, aiTags, stock },
-      { new: true, upsert: true }
+      { returnDocument: 'after', upsert: true }
     );
 
     return NextResponse.json({ product }, { status: existingProduct ? 200 : 201 });

@@ -225,6 +225,7 @@ export const AppContextProvider = (props) => {
     setIsAdmin(false);
     setCartItems({});
     localStorage.removeItem('qc_guest_cart');
+    localStorage.removeItem('qc_session_id');
     toast.success('Logged out');
     router.push('/');
   };

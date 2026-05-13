@@ -8,9 +8,22 @@ const HomeProducts = () => {
 
   useEffect(() => {
     if (products.length > 0) {
-      // Get trending or highest viewed products
-      const sorted = [...products].sort((a, b) => (b.stats?.sales || 0) - (a.stats?.sales || 0));
-      setTrending(sorted);
+      // Calculate popularity score: (sales * 5) + (views * 1) + (rating * 2)
+      const scored = products.map(p => ({
+        ...p,
+        _score: ((p.stats?.sales || 0) * 5) + ((p.stats?.views || 0) * 1) + ((p.rating || 4.5) * 2)
+      }));
+
+      // Sort by score
+      const sorted = scored.sort((a, b) => b._score - a._score);
+
+      // Take top 30 most popular
+      const top30 = sorted.slice(0, 30);
+
+      // Shuffle the top 30 to make it feel fresh on each load
+      const shuffled = [...top30].sort(() => Math.random() - 0.5);
+
+      setTrending(shuffled);
     }
   }, [products]);
 

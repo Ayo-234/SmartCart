@@ -2,25 +2,26 @@
 import React, { useEffect, useState } from 'react';
 import ProductCard from './ProductCard';
 import { Sparkles, TrendingUp } from 'lucide-react';
+import { useAppContext } from '@/context/AppContext';
 
 const AIRecommendations = () => {
+  const { userData } = useAppContext();
   const [recommendations, setRecommendations] = useState([]);
   const [recType, setRecType] = useState('trending');
   const [loading, setLoading] = useState(true);
+  const [sessionId, setSessionId] = useState(null);
 
   useEffect(() => {
     fetchRecommendations();
-  }, []);
+  }, [userData]);
 
   const fetchRecommendations = async () => {
     try {
       setLoading(true);
       const sid = getOrCreateSessionId();
-      const userRes = await fetch('/api/auth/me', { credentials: 'same-origin' });
       let url = `/api/recommendations?sessionId=${sid}`;
-      if (userRes.ok) {
-        const userData = await userRes.json();
-        url += `&userId=${userData.user._id}`;
+      if (userData) {
+        url += `&userId=${userData._id}`;
       }
       const res = await fetch(url);
       if (!res.ok) throw new Error('Failed');
