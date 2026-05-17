@@ -76,6 +76,7 @@ const HeaderSlider = () => {
                 className="md:w-72 w-48 object-contain drop-shadow-xl"
                 src={slide.imgSrc}
                 alt={`Slide ${index + 1}`}
+                priority={index === 0}
               />
             </div>
           </div>

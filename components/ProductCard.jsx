@@ -18,8 +18,8 @@ const ProductCard = ({ product }) => {
                     src={product.image?.[0] || assets.upload_area}
                     alt={product.name}
                     className="group-hover:scale-105 transition object-cover w-4/5 h-4/5 md:w-full md:h-full"
-                    width={800}
-                    height={800}
+                    width={400}
+                    height={400}
                 />
                 {product.stock === 0 && (
                     <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
