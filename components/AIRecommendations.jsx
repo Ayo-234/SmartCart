@@ -71,11 +71,6 @@ const AIRecommendations = () => {
             {isAI ? 'Recommended for You' : 'Trending Right Now'}
           </p>
         </div>
-        {isAI && (
-          <span className="inline-flex items-center gap-1.5 text-xs font-semibold bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 px-3 py-1 rounded-full">
-            <Sparkles size={12} /> AI Personalized
-          </span>
-        )}
       </div>
 
       <div className="w-full flex overflow-x-auto gap-6 pb-6 snap-x snap-mandatory transition-all scroll-smooth scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700">
