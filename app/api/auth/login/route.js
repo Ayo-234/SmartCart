@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+import { SignJWT } from 'jose';
 import connectDB from '@/lib/mongodb';
 import User from '@/models/User';
 
@@ -35,11 +35,15 @@ export async function POST(request) {
       );
     }
 
-    const token = jwt.sign(
-      { userId: user._id, role: user.role },
-      process.env.JWT_SECRET || 'fallback_secret_key_change_me',
-      { expiresIn: '7d' }
+    const secret = new TextEncoder().encode(
+      process.env.JWT_SECRET || 'fallback_secret_key_change_me'
     );
+
+    const token = await new SignJWT({ userId: user._id, role: user.role })
+      .setProtectedHeader({ alg: 'HS256' })
+      .setIssuedAt()
+      .setExpirationTime('7d')
+      .sign(secret);
 
     const response = NextResponse.json(
       {
